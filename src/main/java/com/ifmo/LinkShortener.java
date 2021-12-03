@@ -16,7 +16,8 @@ public class LinkShortener implements ShortenerActions {
     }
 
     @Override
-    public void convert(String link) {
+    public String convert(String link) {
+        return ListOfLinks.get(link);
 
     }
 
