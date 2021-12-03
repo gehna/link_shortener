@@ -8,7 +8,11 @@ public class LinkShortener implements ShortenerActions {
 
     @Override
     public void remove(String link) {
-
+        if (ListOfLinks.containsValue(link)) {
+            ListOfLinks.remove(link);
+        } else {
+            System.out.println("Value " + link + " is not exist");
+        }
     }
 
     @Override
