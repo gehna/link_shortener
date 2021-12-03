@@ -1,10 +1,15 @@
 package com.ifmo;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class LinkShortener implements ShortenerActions {
-    HashMap<String, String> ListOfLinks = new HashMap<>();
+    HashMap<String, String> ListOfLinks;
+
+    public LinkShortener(HashMap<String, String> listOfLinks) {
+        ListOfLinks = listOfLinks;
+    }
 
     @Override
     public void remove(String link) {
@@ -16,9 +21,19 @@ public class LinkShortener implements ShortenerActions {
     }
 
     @Override
-    public String convert(String link) {
+    public String convertShortToLong(String link) {
         return ListOfLinks.get(link);
 
+    }
+
+    @Override
+    public String getShortString(String link) {
+        for (Map.Entry<String, String> entry : ListOfLinks.entrySet()) {
+            if (entry.getValue().equals(link)) {
+                return entry.getKey();
+            }
+        }
+        return ""+link+" not found";
     }
 
     @Override
@@ -27,7 +42,7 @@ public class LinkShortener implements ShortenerActions {
             System.out.println("Value "+ link + " is already exist");
         } else {
             String shortLink;
-            String schema = link.substring(0, link.indexOf("://"));
+            String schema = link.substring(0, link.indexOf("://")) + "://";
             String domain = ".lk.ru";
 
             int leftLimit = 97; // letter 'a'
@@ -45,5 +60,14 @@ public class LinkShortener implements ShortenerActions {
             shortLink = schema + shortLink + domain;
             ListOfLinks.put(shortLink, link);
         }
+    }
+
+    public static void main(String[] args) {
+        LinkShortener lSh = new LinkShortener(new HashMap<>());
+        lSh.add("http://lalalala.ru");
+        lSh.add("http://dadada.ru");
+        System.out.println(lSh.getShortString("http://lalalala.ru"));
+//        System.out.println(lSh);
+
     }
 }
