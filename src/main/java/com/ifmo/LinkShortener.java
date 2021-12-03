@@ -7,6 +7,16 @@ public class LinkShortener implements ShortenerActions {
     HashMap<String, String> ListOfLinks = new HashMap<>();
 
     @Override
+    public void remove(String link) {
+
+    }
+
+    @Override
+    public void convert(String link) {
+
+    }
+
+    @Override
     public void add(String link) {
         if (ListOfLinks.containsValue(link)){
             System.out.println("Value "+ link + " is already exist");
@@ -27,8 +37,8 @@ public class LinkShortener implements ShortenerActions {
             }
             shortLink = buffer.toString();
 
-
-            ListOfLinks.put(convert(link), link);
+            shortLink = schema + shortLink + domain;
+            ListOfLinks.put(shortLink, link);
         }
     }
 }
