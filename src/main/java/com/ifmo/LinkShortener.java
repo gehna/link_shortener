@@ -7,13 +7,20 @@ import java.util.Random;
 public class LinkShortener implements ShortenerActions {
     HashMap<String, String> ListOfLinks;
 
+    @Override
+    public String toString() {
+        return "LinkShortener{" +
+                "ListOfLinks=" + ListOfLinks +
+                '}';
+    }
+
     public LinkShortener(HashMap<String, String> listOfLinks) {
         ListOfLinks = listOfLinks;
     }
 
     @Override
     public void remove(String link) {
-        if (ListOfLinks.containsValue(link)) {
+        if (ListOfLinks.containsKey(link)) {
             ListOfLinks.remove(link);
         } else {
             System.out.println("Value " + link + " is not exist");
@@ -66,7 +73,12 @@ public class LinkShortener implements ShortenerActions {
         LinkShortener lSh = new LinkShortener(new HashMap<>());
         lSh.add("http://lalalala.ru");
         lSh.add("http://dadada.ru");
+        System.out.println(lSh.ListOfLinks);
         System.out.println(lSh.getShortString("http://lalalala.ru"));
+        lSh.remove(lSh.getShortString("http://lalalala.ru"));
+        System.out.println(lSh.getShortString("http://lalalala.ru"));
+        System.out.println(lSh.ListOfLinks);
+
 //        System.out.println(lSh);
 
     }
