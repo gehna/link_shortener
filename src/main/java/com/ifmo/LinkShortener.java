@@ -70,7 +70,7 @@ public class LinkShortener implements ShortenerActions {
     }
 
     public static void main(String[] args) {
-        LinkShortener lSh = new LinkShortener(new HashMap<>());
+        LinkShortener lSh = new LinkShortener(new HashMap<String, String>());
         lSh.add("http://lalalala.ru");
         lSh.add("http://dadada.ru");
         System.out.println(lSh.ListOfLinks);
